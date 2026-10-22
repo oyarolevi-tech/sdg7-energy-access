@@ -26,7 +26,8 @@ modeling, with a Kenya spotlight.
 - [x] 3. Data Preparation
 - [ ] 4. Modeling (linear regression, Ridge)
 - [ ] 5. Evaluation (R² and MSE)
-- [ ] 6. Deployment (Power BI dashboard, Streamlit app)
+- [ ] 6. Deployment (Dashboard design (screenshots in reports/))
+
 
 ## Project structure
 ```
