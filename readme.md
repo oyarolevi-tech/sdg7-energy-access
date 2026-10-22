@@ -43,7 +43,11 @@ The preparation process includes:
 * Performing exploratory analysis and descriptive statistics.
 * Preparing appropriate features for regression modelling.
 
-**Data source:** Add the original dataset provider and source link here.
+**Data sources:**
+* [Our World in Data energy dataset](https://github.com/owid/energy-data): electricity mix, per-capita energy, population
+* [World Bank Open Data](https://data.worldbank.org): electricity access, renewable share of final energy, GDP per capita, urban population
+
+**Size:** 5,040 raw country-year rows (220 countries, 2000–2022), reduced to 4,338 rows (194 countries) after cleaning.
 
 ## 6. Methodology: CRISP-DM
 
@@ -89,41 +93,45 @@ Model performance is evaluated using:
 The model results and diagnostic findings should be interpreted before drawing conclusions about predictive performance.
 
 ## 8. Dashboard
+The dashboard design has three pages (screenshots in `reports/`):
+1. Global overview: average access, countries below 90%, people without access, trend
+2. What is linked to access: lowest-access countries, renewables vs access, income vs access
+3. Kenya spotlight
 
-The Power BI dashboard presents key patterns and insights from the electricity access dataset.
+![Page 1](reports/page1_global_overview.png)
+![Page 2](reports/page2_links_to_access.png)
+![Page 3](reports/page3_kenya_spotlight.png)
 
 ## 9. Key Findings
-
-Add the actual findings from the completed analysis here, including:
-
-Major patterns in electricity access across countries and years.
-Relationships between electricity access and selected indicators.
-Linear Regression and Ridge Regression evaluation results.
-The selected model and the reasons for selecting it.
+* Average electricity access rose from 72.5% (2000) to 87.1% (2022), but 52 of 191 countries are still below 90%.
+* Kenya rose from 15.2% to 76.0%, with 87.8% of its electricity from renewables in 2022.
+* Income is the strongest predictor (correlation 0.73 with log GDP per capita), followed by urbanisation (0.63).
+* Linear and Ridge Regression perform almost identically: R² about 0.60, RMSE about 19 percentage points. Ridge is kept for stability because predictors are correlated.
+* Capping predictions to the 0–100% range improves R² to about 0.63.
 ## 10. Limitations
-Observational relationships do not establish causation.
-Missing data and differences in data coverage may affect the analysis.
-Model performance depends on the available features and the evaluation method.
-Predictions should be interpreted with caution when applied to countries or periods not adequately represented in the training data.
+* Observational relationships do not establish causation.
+* Missing data and differences in coverage may affect the analysis.
+* Uneven error variance and dependence between years of the same country mean coefficient significance should not be over-interpreted.
+* The lowest-access ranking excludes countries removed during cleaning (for example South Sudan).
 ## 11. Project Structure
-sdg7-energy-access/
+```
+final Power BI/
 ├── notebooks/
 │   └── 01_sdg7_crisp_dm.ipynb
 ├── data/
+│   └── processed/        # cleaned dataset
+├── powerbi/              # dashboard files
+├── reports/              # dashboard screenshots
 ├── app/
-├── README.md
-└── ...
-
-The structure above is illustrative. Update it to match the files and folders actually present in the repository.
+├── requirements.txt
+└── readme.md
+```
 
 ## 12. Running the Notebook
-Clone or download the repository.
-Install the required Python packages.
-Open notebooks/01_sdg7_crisp_dm.ipynb in Jupyter Notebook or VS Code.
-Ensure the dataset is available at the path expected by the notebook.
-Run the notebook cells in order.
-
-Add a requirements.txt file if you want to document the project's Python dependencies.
+1. Clone or download the repository.
+2. Create a virtual environment and install packages: `pip install -r requirements.txt`
+3. Open `notebooks/01_sdg7_crisp_dm.ipynb` in VS Code or Jupyter.
+4. Run all cells in order. The notebook downloads the raw data itself.
 
 ## 13. Conclusion
 
