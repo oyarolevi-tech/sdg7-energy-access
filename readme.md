@@ -42,8 +42,8 @@ sdg7-energy-access/
 ```
 
 ## How to run
-```powershell
-git clone https://github.com/<your-username>/sdg7-energy-access.git
+
+git clone https://github.com/oyarolevi-tech/sdg7-energy-access.git
 cd sdg7-energy-access
 python -m venv .venv
 .venv\Scripts\Activate.ps1
