@@ -5,8 +5,8 @@ import streamlit as st
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-model = joblib.load(ROOT / "notebooks" / "models" / "sdg7_electricity_access_model.pkl")
-data = pd.read_csv(ROOT / "data" / "processed" / "sdg7_clean.csv")
+model = joblib.load(ROOT / "models" / "sdg7_electricity_access_model.pkl")
+data = pd.read_csv(ROOT.parent / "data" / "processed" / "sdg7_clean.csv")
 
 FEATURES = ["gdp_per_capita_log", "urban_pop_pct", "energy_per_capita", "carbon_intensity_elec",
             "fossil_share_elec", "hydro_share_elec", "solar_share_elec", "wind_share_elec", "population"]
