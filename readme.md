@@ -136,3 +136,19 @@ final Power BI/
 ## 13. Conclusion
 
 This project applies data analysis and machine learning to investigate electricity access in the context of SDG 7. It combines exploratory analysis, regression modelling, model evaluation, and dashboard visualisation to support a better understanding of patterns associated with electricity access.
+
+### Future work
+**Next steps**
+- Build the live dashboard (Power BI or Streamlit) from the cleaned dataset.
+- Bound the model's output to 0–100% by design, for example by modelling the log-odds of access.
+- Test the biomass-adjusted renewable measure (`renewable_final_energy_pct` raised R² from about 0.60 to 0.74 in a quick check).
+
+### What is new beyond class
+- Built the dataset from two real, non-Kaggle sources through the World Bank API, with retries and file caching.
+- Checked for target leakage (the access gap is exactly 100 minus the target) and excluded it.
+- Filled missing values within each country over time, not with one global average.
+- Tested all regression assumptions and found that independence fails, which only shows up when residuals are sorted by country and year.
+- Chose the Ridge strength by cross-validation and standardised features inside a pipeline.
+- Found that an unscaled linear fit was numerically unreliable on this data and fixed it by scaling.
+- Capped predictions to the valid 0–100% range, which improved the fit.
+- Delivered a reusable saved model and a documented, reproducible GitHub repository.
